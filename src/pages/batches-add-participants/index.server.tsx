@@ -1,6 +1,7 @@
 import HTML from '../../layouts/html';
 import { Batch } from '../../entities/batch';
 import BatchDetailCard from '../../components/batch-detail-card';
+import BatchDetailNavigation from '../../components/batch-detail-navigation';
 
 export default function BatchesAddParticipants({ batch }: { batch: Batch }) {
 	let num = 0;
@@ -41,32 +42,7 @@ export default function BatchesAddParticipants({ batch }: { batch: Batch }) {
 							<BatchDetailCard batch={ batch } />
 						</div>
 						<div class='col-12' id='groups'>
-							<div class='card mt-3'>
-								<div class='card-body'>
-									<ul class='nav nav-tabs'>
-										<li class='nav-item'>
-											<a href={ `/admin/batches/${batch.id}#assessors` } class='nav-link'>
-												Assessor
-											</a>
-										</li>
-										<li class='nav-item'>
-											<a href={ `/admin/batches/${batch.id}/participants#participants` } class='nav-link active'>
-												Peserta
-											</a>
-										</li>
-										<li class='nav-item'>
-											<a href={ `/admin/batches/${batch.id}/groups#groups` } class='nav-link'>
-												Group
-											</a>
-										</li>
-										<li class='nav-item'>
-											<a href={ `/admin/batches/${batch.id}/schedule#schedule` } class='nav-link'>
-												Jadwal
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
+							<BatchDetailNavigation batchId={batch.id} activeLink='peserta' />
 						</div>
 					</div>
 				</section>
