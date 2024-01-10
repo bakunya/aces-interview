@@ -1,0 +1,40 @@
+{
+	"name": "aces-interview",
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "wrangler dev --env=development src/index.ts",
+		"deploy": "wrangler deploy --env=production --minify src/index.ts",
+		"db:prod": "npx wrangler d1 execute aces --env production --file=./schema/draft.sql",
+		"db:dev": "npx wrangler d1 execute aces-dev --env development --file=./schema/draft.sql",
+		"db:local": "npx wrangler d1 execute aces-dev --local --env development --file=./schema/draft.sql",
+		"client:watch:client-env": "esbuild ./src/client-env/index.ts --bundle --splitting --watch --outdir=./public/js --minify --format=esm",
+		"client:watch:batches-new": "esbuild ./src/pages/batches-new/index.client.tsx --bundle --watch --outfile=./public/js/batches-new.js --minify",
+		"client:watch:batches-participant": "esbuild ./src/pages/batches-participant/index.client.tsx --bundle --watch --outfile=./public/js/batches-participant.js --minify",
+		"client:watch:batches-add-participants": "esbuild ./src/pages/batches-add-participants/index.client.tsx --bundle --watch --outfile=./public/js/batches-add-participants.js --minify"
+	},
+	"dependencies": {
+		"bootstrap": "^5.3.2",
+		"clsx": "^2.0.0",
+		"hono": "^3.11.8",
+		"lodash.chunk": "^4.2.0",
+		"lodash.flattendeep": "^4.4.0",
+		"lodash.groupby": "^4.6.0",
+		"lodash.max": "^4.0.1",
+		"papaparse": "^5.4.1",
+		"rxjs": "^7.8.1",
+		"sweetalert2": "^11.10.1",
+		"toastify-js": "^1.12.0",
+		"ts-pattern": "^5.0.6",
+		"ulid-workers": "^2.1.0"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20231218.0",
+		"@types/bootstrap": "^5.2.10",
+		"@types/lodash.chunk": "^4.2.9",
+		"@types/lodash.flattendeep": "^4.4.9",
+		"@types/lodash.groupby": "^4.6.9",
+		"@types/lodash.max": "^4.0.9",
+		"@types/papaparse": "^5.3.14",
+		"wrangler": "^3.22.0"
+	}
+}
