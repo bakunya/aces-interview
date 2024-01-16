@@ -11,9 +11,9 @@ export type TJoinMapping = {
 
 export default function joinMapping(t: TJoinMapping) {
 	let str = ''
-	
 	for (const [key, value] of Object.entries(t)) {
-		str += ` ${sqlEscapeString(value?.join ?? "join")} ${sqlEscapeString(key)} ON ${sqlEscapeString(value.reference)} ${sqlEscapeString(value?.stmt ?? "=")} ${sqlEscapeString(key)}.${sqlEscapeString(value.foreign)}`
+		const f = sqlEscapeString(value.foreign).includes(".") ? sqlEscapeString(value.foreign) : `${sqlEscapeString(key)}.${sqlEscapeString(value.foreign)}`
+		str += ` ${sqlEscapeString(value?.join ?? "join")} ${sqlEscapeString(key)} ON ${sqlEscapeString(value.reference)} ${sqlEscapeString(value?.stmt ?? "=")} ${f}`
 	}
 
 	return str

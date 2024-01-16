@@ -2,8 +2,9 @@ import HTML from '../../layouts/html';
 import { Batch } from '../../entities/batch';
 import BatchDetailCard from '../../components/batch-detail-card';
 import BatchDetailNavigation from '../../components/batch-detail-navigation';
+import { TMinimumAssessor } from '../../types/TMinimumAssessor';
 
-export default function BatchesAddParticipants({ batch }: { batch: Batch }) {
+export default function BatchesAddParticipants({ batch, minimumAssessor }: { minimumAssessor: TMinimumAssessor, batch: Batch }) {
 	let num = 0;
 
 	return (
@@ -39,7 +40,7 @@ export default function BatchesAddParticipants({ batch }: { batch: Batch }) {
 				<section class='section'>
 					<div class='row match-height'>
 						<div class='col-md-6 col-12'>
-							<BatchDetailCard batch={ batch } />
+							<BatchDetailCard batch={ batch } minimumAssessor={minimumAssessor} />
 						</div>
 						<div class='col-12' id='groups'>
 							<BatchDetailNavigation batchId={batch.id} activeLink='peserta' />

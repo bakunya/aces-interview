@@ -1,12 +1,12 @@
 import { Context } from 'hono';
+import E404 from '../layouts/404';
 import { Bindings } from '../binding';
 import getAll from '../repositories/get-all';
 import { Batch } from '../entities/batch';
-import E404 from '../layouts/404';
 import getOne from '../repositories/get-one';
-import BatchesSchedule from '../pages/batches-schedule/index.server';
 import { TGroupSlots } from '../types/TGroupSlot';
 import BatchesGroups from '../pages/batches-group/index.server';
+import { getMinimumAssessor } from '../repositories/get-minimum-assessor';
 
 export default async function batchesGroupController(c: Context<{ Bindings: Bindings }>) {
 	async function getGroups(batchId: string) {
@@ -30,13 +30,31 @@ export default async function batchesGroupController(c: Context<{ Bindings: Bind
 			}
 		);
 
-		return x
+		const participantCount = (
+			await c.env.DB.prepare(`
+				SELECT 
+					count(person_id) as person_count,
+					group_id
+				FROM groupings
+				WHERE batch_id = ?
+				GROUP BY group_id
+			`).bind(batchId).all()
+		).results
+
+		return x.map((group) => {
+			const count = participantCount.find((x) => x.group_id === group.id)
+			return {
+				...group,
+				participant_count: count?.person_count || 0
+			}
+		}) as TGroupSlots
 	}
 
-	const batches = await getOne<Batch>(c.env.DB, 'batches', { id: { keyword: c.req.param('id') } });
+	const batches = await getOne<Batch>(c.env.DB, 'batches', { id: { keyword: c.req.param('id') } })
 	if(!batches) return c.html(<E404 />)
 	
 	const groups = await getGroups(batches.id)
+	const minimumAssessor = await getMinimumAssessor(c.env.DB, batches.id)
 
-	return c.html(<BatchesGroups batch={batches} groups={groups} />);
+	return c.html(<BatchesGroups batch={batches} groups={groups} minimumAssessor={minimumAssessor} />);
 }

@@ -6,6 +6,7 @@ import E404 from '../layouts/404';
 import getOne from '../repositories/get-one';
 import { TGroupingPersonSlotGroups } from '../types/TGroupingPersonSlotGroup';
 import BatchesSchedule from '../pages/batches-schedule/index.server';
+import { getMinimumAssessor } from '../repositories/get-minimum-assessor';
 
 export default async function batchesScheduleController(c: Context<{ Bindings: Bindings }>) {
 	async function getGrouping(batchId: string) {
@@ -48,6 +49,7 @@ export default async function batchesScheduleController(c: Context<{ Bindings: B
 	if(!batches) return c.html(<E404 />)
 	
 	const groupings = await getGrouping(batches.id)
+	const minimumAssessor = await getMinimumAssessor(c.env.DB, batches.id)
 
-	return c.html(<BatchesSchedule batch={batches} grouping={groupings} />);
+	return c.html(<BatchesSchedule batch={batches} minimumAssessor={minimumAssessor} grouping={groupings} />);
 }

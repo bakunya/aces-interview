@@ -66,6 +66,12 @@ export default function SidebarAdmin({ activeNav }: { activeNav: string[] }) {
 				<div class='sidebar-menu'>
 					<ul class='menu'>
 						<li class='sidebar-title'>Menu</li>
+						<li class={clsx('sidebar-item', activeNav[0] === 'organization' && 'active')}>
+							<a href='/organization' class='sidebar-link'>
+								<i class="bi bi-diagram-2"></i>
+								<span>Organization</span>
+							</a>
+						</li>
 						<li class={clsx('sidebar-item', activeNav[0] === 'batches' && 'active')}>
 							<a href='/batches' class='sidebar-link'>
 								<i class='bi bi-grid-fill'></i>

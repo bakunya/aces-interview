@@ -5,12 +5,15 @@ import BatchDetailCard from '../../components/batch-detail-card';
 import { TGroupingPersonSlotGroups } from '../../types/TGroupingPersonSlotGroup';
 import groupBy from 'lodash.groupby';
 import BatchDetailNavigation from '../../components/batch-detail-navigation';
+import { TMinimumAssessor } from '../../types/TMinimumAssessor';
 
 export default function BatchesSchedule({
 	batch,
 	grouping,
+	minimumAssessor
 }: {
 	batch: Batch;
+	minimumAssessor: TMinimumAssessor;
 	grouping: TGroupingPersonSlotGroups
 }) {
 	let num = 0;
@@ -48,7 +51,7 @@ export default function BatchesSchedule({
 				<section class='section'>
 					<div class='row match-height'>
 						<div class='col-md-6 col-12'>
-							<BatchDetailCard batch={ batch } />
+							<BatchDetailCard batch={ batch } minimumAssessor={minimumAssessor} />
 						</div>
 						<div class='col-12' id='schedule'>
 							<BatchDetailNavigation

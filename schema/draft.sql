@@ -188,10 +188,25 @@ INSERT INTO slots VALUES
     ('22j', 'group-f2f', null, null, 'group', 'f2f'),
     ('22k', 'group-f2f', null, null, 'f2f', 'group'),
 	-- 1 --baru
-	('1a', 'self-only', 'self', null, null, null),
-	('1b', 'case-only', 'case', null, null, null),
-	('1c', 'group-only', 'group', null, null, null),
-	('1d', 'f2f-only', 'f2f', null, null, null);
+	('1a', 'self-only',  'self', null, null, null),
+	('1b', 'self-only',  null, 'self', null, null),
+	('1c', 'self-only',  null, null, 'self', null),
+	('1d', 'self-only',  null, null, null, 'self'),
+
+	('1e', 'case-only',  'case', null, null, null),
+	('1f', 'case-only',  null, 'case', null, null),
+	('1g', 'case-only',  null, null, 'case', null),
+	('1h', 'case-only',  null, null, null, 'case'),
+
+	('1i', 'group-only',  'group', null, null, null),
+	('1j', 'group-only',  null, 'group', null, null),
+	('1k', 'group-only',  null, null, 'group', null),
+	('1l', 'group-only',  null, null, null, 'group'),
+
+	('1m', 'f2f-only',  'f2f', null, null, null),
+	('1n', 'f2f-only',  null, 'f2f', null, null),
+	('1o', 'f2f-only',  null, null, 'f2f', null),
+	('1p', 'f2f-only',  null, null, null, 'f2f');
 
 -- tools (9)
 -- need to dev ID semantic for each tool, eg:

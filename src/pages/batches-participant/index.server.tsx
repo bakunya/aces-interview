@@ -4,8 +4,9 @@ import { Persons } from '../../entities/person';
 import BatchDetailCard from '../../components/batch-detail-card';
 import ParticipantTableRow from '../../components/participant-table-row';
 import BatchDetailNavigation from '../../components/batch-detail-navigation';
+import { TMinimumAssessor } from '../../types/TMinimumAssessor';
 
-export default function BatchesParticipants({ batch, participants }: { participants: Persons, batch: Batch }) {
+export default function BatchesParticipants({ batch, minimumAssessor, participants }: { minimumAssessor: TMinimumAssessor, participants: Persons, batch: Batch }) {
 	return (
 		<HTML activeNav={ ['batches'] } js={ ['/js/batches-participant.js'] }>
 			<div id='main'>
@@ -39,7 +40,7 @@ export default function BatchesParticipants({ batch, participants }: { participa
 				<section class='section'>
 					<div class='row match-height'>
 						<div class='col-md-6 col-12'>
-							<BatchDetailCard batch={ batch } />
+							<BatchDetailCard batch={ batch } minimumAssessor={minimumAssessor} />
 						</div>
 						<div class='col-12' id='participants'>
 							<BatchDetailNavigation

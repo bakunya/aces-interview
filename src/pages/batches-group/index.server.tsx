@@ -3,8 +3,9 @@ import BatchDetailCard from '../../components/batch-detail-card';
 import { Batch } from '../../entities/batch';
 import { TGroupSlots } from '../../types/TGroupSlot';
 import BatchDetailNavigation from '../../components/batch-detail-navigation';
+import { TMinimumAssessor } from '../../types/TMinimumAssessor';
 
-export default function BatchesGroups({ batch, groups }: { batch: Batch, groups: TGroupSlots }) {
+export default function BatchesGroups({ batch, groups, minimumAssessor }: { minimumAssessor: TMinimumAssessor, batch: Batch, groups: TGroupSlots }) {
 	return (
 		<HTML activeNav={ ['batches'] }>
 			<div id='main'>
@@ -38,7 +39,7 @@ export default function BatchesGroups({ batch, groups }: { batch: Batch, groups:
 				<section class='section'>
 					<div class='row match-height'>
 						<div class='col-md-6 col-12'>
-							<BatchDetailCard batch={ batch } />
+							<BatchDetailCard batch={ batch } minimumAssessor={minimumAssessor} />
 						</div>
 						<div class='col-12' id='groups'>
 							<BatchDetailNavigation 
@@ -69,6 +70,7 @@ export default function BatchesGroups({ batch, groups }: { batch: Batch, groups:
 											<tr>
 												<th class='text-left'>No</th>
 												<th class='text-left'>Nama</th>
+												<th class='text-left'>Peserta</th>
 												<th class='text-left'>Sesi Pagi 1</th>
 												<th class='text-left'>Sesi Pagi 2</th>
 												<th class='text-left'>Sesi Siang 1</th>
@@ -81,6 +83,7 @@ export default function BatchesGroups({ batch, groups }: { batch: Batch, groups:
 												<tr>
 													<td class='text-left fw-bold'>{ i + 1 }</td>
 													<td class='text-left'>{ x?.name }</td>
+													<td class='text-left'>{ x?.participant_count }</td>
 													<td class='text-left'>
 														{ x?.slot1 }
 													</td>

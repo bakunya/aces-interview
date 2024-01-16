@@ -6,4 +6,5 @@ export type TGroupSlots = (Group & {
 	slot3: string;
 	slot4: string;
 	slot_id: string;
+	participant_count: number;
 })[]

@@ -1,14 +1,14 @@
 import HTML from '../../layouts/html';
 import StickyBottom from '../../components/sticky-bottom';
-import { OrganizationModel } from '../../models/organization';
-import SelectOrganization from '../../components/select-organization';
 import { Tool, Tools } from '../../entities/tools';
 import groupBy from 'lodash.groupby'
 import clsx from 'clsx';
+import { Organization } from '../../entities/organization';
 
-export default function BatchesNew({ organization, tools }: { tools: Tools, organization: OrganizationModel[] }) {
+export default function BatchesNew({ organization, tools }: { tools: Tools, organization: Organization }) {
 	return (
 		<HTML role='admin' activeNav={ ['batches'] } js={ ['/js/batches-new.js'] }>
+			<input type="hidden" name="org_id" value={organization.id} />
 			<div id='main'>
 				<header class='mb-3'>
 					<a href='#' class='burger-btn d-block d-xl-none'>
@@ -19,7 +19,7 @@ export default function BatchesNew({ organization, tools }: { tools: Tools, orga
 					<div class='page-title'>
 						<div class='row'>
 							<div class='col-12 col-md-6 order-md-1 order-last'>
-								<h3>Batch</h3>
+								<h3>Batch {organization.name}</h3>
 								<p class='text-subtitle text-muted'>Buat Batch Baru</p>
 							</div>
 							<div class='col-12 col-md-6 order-md-2 order-first d-flex justify-content-end'>
@@ -78,15 +78,6 @@ export default function BatchesNew({ organization, tools }: { tools: Tools, orga
 														</div>
 														<div class='col-md-8'>
 															<input type='file' id='input-file-peserta' accept='.csv' />
-														</div>
-														<div class='col-12 my-4'>
-															<hr />
-														</div>
-														<div class='col-md-4'>
-															<label for='peserta-file-input'>Perusahaan</label>
-														</div>
-														<div class='col-md-8'>
-															<SelectOrganization organization={ organization } />
 														</div>
 														<div class='col-12 my-4'>
 															<hr />

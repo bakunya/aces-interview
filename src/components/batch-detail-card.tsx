@@ -1,6 +1,7 @@
 import { Batch } from "../entities/batch";
+import { TMinimumAssessor } from "../types/TMinimumAssessor";
 
-export default function BatchDetailCard({ batch }: { batch: Batch }) {
+export default function BatchDetailCard({ batch, minimumAssessor }: { minimumAssessor: TMinimumAssessor, batch: Batch }) {
 	return (
 		<div class='card'>
 			<div class='card-content'>
@@ -21,7 +22,7 @@ export default function BatchDetailCard({ batch }: { batch: Batch }) {
 									<p class='mb-0'>Jumlah peserta</p>
 								</div>
 								<div class='col-md-6'>
-									{/* <p class='mb-0 text-subtitle text-muted'>{ batch.participant_count ?? 0 }</p> */}
+									{/* <p class='mb-0 text-subtitle text-muted'>{ batch.participant_count ?? 0 }</p> */ }
 								</div>
 								<div class='col-12'>
 									<hr class='my-4' />
@@ -39,10 +40,9 @@ export default function BatchDetailCard({ batch }: { batch: Batch }) {
 									<p class='mb-0'>Minimal assessor LGD</p>
 								</div>
 								<div class='col-md-6'>
-									{/* <p class='mb-0 text-subtitle text-muted'>
-										{ batch.lgd_assessors?.length } /{ ' ' }
-										<span class='text-danger'>{ batch.minimum_lgd_assessors }</span>
-									</p> */}
+									<p class='mb-0 text-subtitle text-muted'>
+										{ minimumAssessor.group }
+									</p>
 								</div>
 								<div class='col-12'>
 									<hr class='my-4' />
@@ -51,10 +51,9 @@ export default function BatchDetailCard({ batch }: { batch: Batch }) {
 									<p>Minimal assessor wawancara</p>
 								</div>
 								<div class='col-md-6'>
-									{/* <p class='text-subtitle text-muted'>
-										{ batch.wwcr_assessors?.length } /{ ' ' }
-										<span class='text-danger'>{ batch.minimum_wwcr_assessors }</span>
-									</p> */}
+									<p class='text-subtitle text-muted'>
+										{ minimumAssessor.f2f }
+									</p>
 								</div>
 							</div>
 							<form action={ `/admin/batches/${batch.id}/deploy` } class="mt-2 mb-4" method="POST">
